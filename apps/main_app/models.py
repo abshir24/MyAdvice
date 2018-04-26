@@ -6,11 +6,8 @@ from ..logreg.models import User
 
 class AnswersManager(models.Manager):
     def answerAdd(self,answerlist,user_id):
-        print "answers", answerlist
-        print "userid", user_id
         creator = User.objects.get(id = user_id)
         for item in answerlist:
-            print "item", item
             self.create(user = creator, answer = item)
 
         return

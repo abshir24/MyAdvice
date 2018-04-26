@@ -14,14 +14,11 @@ def answer(request):
 
 def addAnswer(request):
     newanswers = []
-    print "post", request.POST
     for key in request.POST.keys():
         if "csrf" in key:
             continue
         for value in request.POST.getlist(key):
-            print "value", value
             newanswers.append(value)
-    print "newanswers", newanswers
     Answers.objects.answerAdd(newanswers, request.session["user_id"])
     return redirect('main:home')
 
@@ -31,7 +28,6 @@ def newquestion(request):
     count  = 0
     for key in useranswers:
         count = count + 1
-    print count, "count"
     random_num = random.randint(0,count-1)
 
     messages.error(request, useranswers[random_num].answer)
